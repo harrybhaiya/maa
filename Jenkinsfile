@@ -1,37 +1,26 @@
 pipeline {
     agent any
+
     stages {
 
-
-         stage('CHECKOUT') {
+           stage('Build') {
             steps {
               git url: 'https://github.com/harrybhaiya/maa.git', branch :'main'
             }
         }
-
-
-           stage('kubernetescheck') {
-            steps {
-            sh 'aws eks --region ap-south-1 update-kubeconfig --name EKS --profile 266739837450_MWAwsInfraAdmins'                        }
-        }
-           
-           stage('GETNODES') {
-            steps {
-             sh ' kubectl get nodes '
-            }
-}
-
             stage('test') {
             steps {
-             sh ' kubectl create -f nginxser.yaml '
+            script { kubernetesDeploy (configs: 'nginxser.yaml' , kubeconfigId: 'kubeconfigid') }
+
             }
 }
 
-          stage('get pods') {
+          stage('package') {
             steps {
-                sh ' kubectl get pods  '
+                echo "package"
             }
 
     }
 }
 }
+
