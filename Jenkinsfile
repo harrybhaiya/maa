@@ -2,23 +2,30 @@ pipeline {
     agent any
     stages {
 
-           stage('Build') {
+
+         stage('CHECKOUT') {
             steps {
-  sh "aws cloudformation create-stack --stack-name $name --template-body file://test --region ap-south-1  --profile 266739837450_MWAwsInfraAdmins"
-                        }
+              git url: 'https://github.com/harrybhaiya/maa.git', branch :'main'
+            }
+        }
+
+
+           stage('kubernetescheck') {
+            steps {
+            sh 'aws eks --region ap-south-1 update-kubeconfig --name EKS --profile 266739837450_MWAwsInfraAdmins'                        }
+
         }
             stage('test') {
             steps {
-             echo "test"
+             sh ' kubectl create -f nginxser.yaml '
             }
 }
 
-          stage('package') {
+          stage('get pods') {
             steps {
-                echo "package"
+                sh ' kubectl get pods  '
             }
 
     }
 }
 }
-
