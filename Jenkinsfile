@@ -4,7 +4,7 @@ pipeline {
 
            stage('Build') {
             steps {
-  sh "aws cloudformation delete-stack --stack-name name  --profile 266739837450_MWAwsInfraAdmins"
+  sh "aws cloudformation create-stack --stack-name $name --template-body file://test --region ap-south-1  --profile 266739837450_MWAwsInfraAdmins"
                         }
         }
             stage('test') {
