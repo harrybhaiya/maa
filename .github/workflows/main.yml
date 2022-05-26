@@ -1,9 +1,1 @@
-name: MANUAL BUILD
-on:
-  workflow_dispatch
-jobs:
-  build:
-    runs-on: [self-hosted, ip-192-168-1-114]
-    steps:
-      - run: echo "harish"
-      - run: echo "$HOSTNAME"   
+  
