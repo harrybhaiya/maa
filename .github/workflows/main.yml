@@ -5,7 +5,5 @@ jobs:
   build:
     runs-on: [self-hosted, ip-192-168-1-114]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Say Hello World
-        run: echo Hello, world!  
+      - run: echo "harish"
+      - run: echo "$HOSTNAME"   
