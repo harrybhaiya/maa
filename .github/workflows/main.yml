@@ -1,8 +1,11 @@
-name: CI
-on: push
+name: MANUAL BUILD
+on:
+  workflow_dispatch
 jobs:
-  init:
-    runs-on: self-hosted
+  build:
+    runs-on: [self-hosted, NEWUNIFIED]
     steps:
-      - run: echo "harish"
-      - run: echo "$HOSTNAME"
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Say Hello World
+        run: echo Hello, world!  
