@@ -1,12 +1,19 @@
 pipeline {
     agent any
+
     stages {
 
            stage('Build') {
             steps {
-         sh ' kubectl get nodes -o wide  '                        }
-
+              git url: 'https://github.com/harrybhaiya/maa.git', branch :'main'
+            }
         }
+            stage('test') {
+            steps {
+            script { kubernetesDeploy (configs: 'nginxser.yaml' , kubeconfigId: 'kubeconfigid') }
+
+            }
+}
 
           stage('package') {
             steps {
@@ -16,3 +23,4 @@ pipeline {
     }
 }
 }
+
