@@ -23,7 +23,7 @@ pipeline {
     }
         stage('docker run container') {
             steps {
-         sh 'ssh -o StrictHostKeyChecking=no root@192.168.1.173 "sudo docker run -p 80:80 -d --name harish harishnarang2018/ubuntu:1.0.0" '
+         sh 'ssh -o StrictHostKeyChecking=no root@192.168.1.70 "sudo docker run -p 80:80 -d --name harish harishnarang2018/ubuntu:1.0.0" '
             }
 
 
